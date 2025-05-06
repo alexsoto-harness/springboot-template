@@ -45,7 +45,7 @@ jobs:
         run: mvn -B clean install
 
       - name: Run Snyk Maven scan
-        uses: snyk/actions/maven@master
+        uses: snyk/actions/maven-3-jdk-17@master
         with:
           args: test --all-projects --org=$SNYK_ORG
 
