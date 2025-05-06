@@ -27,9 +27,9 @@ jobs:
       GKE_PROJECT: "{{ cookiecutter.gke_project }}"
       SYK_ORG: "{{ cookiecutter.snyk_org }}"
       {% raw -%}
-      DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
-      SNYK_TOKEN=${{ secrets.SNYK_TOKEN }}
-      GCP_TOKEN=${{ secrets.GCP_TOKEN }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      GCP_TOKEN: ${{ secrets.GCP_TOKEN }}
       {% endraw -%}
 
     steps:
