@@ -35,19 +35,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
+      # - name: Set up JDK
+      #   uses: actions/setup-java@v3
+      #   with:
+      #     java-version: '17'
+      #     distribution: 'temurin'
       - name: Build with Maven
         run: mvn -B clean install
 
       - name: Run Snyk Maven scan
         uses: snyk/actions/maven-3-jdk-17@master
         with:
-          args: test --all-projects --org=$SNYK_ORG
+          args: test --all-projects --org=$SNYK_ORG --debug
 
       - name: Log in to Docker Hub
         run: echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
