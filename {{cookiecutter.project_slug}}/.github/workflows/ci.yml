@@ -19,6 +19,11 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      {% raw -%}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      GCP_TOKEN: ${{ secrets.GCP_TOKEN }}
+      {% endraw -%}
       PROJECT_NAME: "{{ cookiecutter.project_name }}"
       PROJECT_SLUG: "{{ cookiecutter.project_slug }}"
       DOCKERHUB_USERNAME: "{{ cookiecutter.dockerhub_username }}"
@@ -26,11 +31,6 @@ jobs:
       GKE_LOCATION: "{{ cookiecutter.gke_location }}"
       GKE_PROJECT: "{{ cookiecutter.gke_project }}"
       SYK_ORG: "{{ cookiecutter.snyk_org }}"
-      {% raw -%}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      GCP_TOKEN: ${{ secrets.GCP_TOKEN }}
-      {% endraw -%}
 
     steps:
       - uses: actions/checkout@v3
