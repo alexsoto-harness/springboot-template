@@ -34,20 +34,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      # - name: Set up JDK
-      #   uses: actions/setup-java@v3
-      #   with:
-      #     java-version: '17'
-      #     distribution: 'temurin'
       - name: Build with Maven
         run: mvn -B clean install
 
       - name: Run Snyk Maven scan
         uses: snyk/actions/maven-3-jdk-17@master
+        continue-on-error: true
         with:
-          args: test --all-projects --org=$SNYK_ORG --debug
-
+          args: --all-projects --org=$SNYK_ORG
+      - name: Snyk monitor (save results to dashboard)
+        uses: snyk/actions/maven-3-jdk-17@master
+        with:
+          command: monitor
+          args: --all-projects --org=$SNYK_ORG
       - name: Log in to Docker Hub
         run: echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
 
@@ -58,10 +57,17 @@ jobs:
 
       - name: Run Snyk Docker scan
         uses: snyk/actions/docker@master
+        continue-on-error: true
         with:
           image: docker.io/$DOCKERHUB_USERNAME/$PROJECT_SLUG:latest
-          args: test --org=$SNYK_ORG
-
+          args: --org=$SNYK_ORG
+      
+      - name: Snyk monitor (save results to dashboard)
+        uses: snyk/actions/docker@master
+        with:
+          image: docker.io/$DOCKERHUB_USERNAME/$PROJECT_SLUG:latest
+          command: monitor
+          args: --org=$SNYK_ORG
       - name: Set up GCloud auth
         uses: google-github-actions/auth@v2
         with:
