@@ -68,19 +68,19 @@ jobs:
           image: docker.io/$DOCKERHUB_USERNAME/$PROJECT_SLUG:latest
           command: monitor
           args: --org=$SNYK_ORG
-      - name: Set up GCloud auth
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: $GCP_TOKEN
+      # - name: Set up GCloud auth
+      #   uses: google-github-actions/auth@v2
+      #   with:
+      #     credentials_json: $GCP_TOKEN
 
-      - name: Set up GKE credentials
-        uses: google-github-actions/get-gke-credentials@v1
-        with:
-          cluster_name: $GKE_CLUSTER
-          location: $GKE_LOCATION
-          project_id: $GKE_PROJECT
+      # - name: Set up GKE credentials
+      #   uses: google-github-actions/get-gke-credentials@v1
+      #   with:
+      #     cluster_name: $GKE_CLUSTER
+      #     location: $GKE_LOCATION
+      #     project_id: $GKE_PROJECT
 
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
+      # - name: Deploy to Kubernetes
+      #   run: |
+      #     kubectl apply -f k8s/deployment.yaml
+      #     kubectl apply -f k8s/service.yaml
