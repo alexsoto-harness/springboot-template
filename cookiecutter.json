@@ -2,7 +2,7 @@
   "project_name": "My Spring Boot App",
   "project_slug": "my_springboot_app",
   "project_owner": "Your Name",
-  "project_description": "My new Spring Boot app",
+  "project_description": "{{ cookiecutter.project_description }}",
   "java_package": "com.example",
   "main_class": "{{ cookiecutter.project_name.replace('-', '').replace('_', '').replace(' ', '').title() }}",
   "java_package_dir": "{{ cookiecutter.java_package.replace('.', '/') }}",
