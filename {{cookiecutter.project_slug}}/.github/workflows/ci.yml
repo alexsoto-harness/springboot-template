@@ -55,19 +55,19 @@ jobs:
           docker build -t docker.io/$DOCKERHUB_USERNAME/$PROJECT_SLUG:latest .
           docker push docker.io/$DOCKERHUB_USERNAME/$PROJECT_SLUG:latest
 
-#      - name: Run Snyk Docker scan
-#        uses: snyk/actions/docker@master
-#        continue-on-error: true
-#        with:
-#          image: docker.io/$DOCKERHUB_USERNAME/$PROJECT_SLUG:latest
-#          args: --org=$SNYK_ORG
-#      
-#      - name: Snyk monitor (save results to dashboard)
-#        uses: snyk/actions/docker@master
-#        with:
-#          image: docker.io/$DOCKERHUB_USERNAME/$PROJECT_SLUG:latest
-#          command: monitor
-#          args: --org=$SNYK_ORG
+      - name: Run Snyk Docker scan
+        uses: snyk/actions/docker@master
+        continue-on-error: true
+        with:
+          image: docker.io/$DOCKERHUB_USERNAME/$PROJECT_SLUG:latest
+          args: --org=$SNYK_ORG
+      
+      - name: Snyk monitor (save results to dashboard)
+        uses: snyk/actions/docker@master
+        with:
+          image: docker.io/$DOCKERHUB_USERNAME/$PROJECT_SLUG:latest
+          command: monitor
+          args: --org=$SNYK_ORG
 
 #      - name: Set up GCloud auth
 #        uses: google-github-actions/auth@v2
