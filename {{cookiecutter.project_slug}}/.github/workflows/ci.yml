@@ -20,7 +20,7 @@ jobs:
 
     env:
       {% raw -%}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      DOCKERHUB_TOKEN: ${{ cookiecutter.DOCKERHUB_TOKEN }}
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       GCP_TOKEN: ${{ secrets.GCP_TOKEN }}
       {% endraw -%}
